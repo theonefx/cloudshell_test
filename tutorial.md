@@ -35,11 +35,11 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
 该注册中心为平台提供的免费注册中心服务实例；
 
-* 修改访问端口<br>
+* 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`60000`；<br>
 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。
 
-* 修改actuator端口<br>
+* 修改 Web 管理端口<br>
 将 `management.server.port` 的值改为：`8081`；<br>
 本案例不使用这个端口，只是避免端口冲突。
 
@@ -51,11 +51,11 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
 该注册中心为平台提供的免费注册中心服务实例，服务端和客户端要使用一个注册中心才能相互发现；
 
-* 修改访问端口<br>
+* 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`61000`；<br>
 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。同时不要和服务端发生端口冲突。
 
-* 修改actuator端口<br>
+* 修改 Web 管理端口<br>
 将 `management.server.port` 的值改为：`8082`；<br>
 本案例不使用这个端口，只是避免端口冲突。
 
