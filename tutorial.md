@@ -39,6 +39,10 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 将 `server.port` 的值改为：`60000`；<br>
 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。
 
+* 修改actuator端口<br>
+将 `management.server.port` 的值改为：`8081`；<br>
+本案例不使用这个端口，只是避免端口冲突。
+
 ### 修改客户端配置
 
 * 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">server 的 application.properties</tutorial-editor-open-file> 文件：
@@ -51,10 +55,13 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 将 `server.port` 的值改为：`61000`；<br>
 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。同时不要和服务端发生端口冲突。
 
+* 修改actuator端口<br>
+将 `management.server.port` 的值改为：`8082`；<br>
+本案例不使用这个端口，只是避免端口冲突。
+
 * 修改OpenFeign方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file> <br>
 将其中的 `nacos-discovery-provider-sample` 替换为 `server`
-
 
 * 修改RestTemplate方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
@@ -139,7 +146,7 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 ![image](https://img.alicdn.com/tfs/TB1y7520uL2gK0jSZFmXXc7iXXa-558-99.png)<br>
 看到上面的内容代表服务端可以正常工作。
 
-<tutorial-web-preview port="60000">测试用，忽略</tutorial-web-preview>
+<tutorial-web-preview port="61000">打开浏览器</tutorial-web-preview>
 
 ### 访问客户端程序
 由于客户端提供2种调用方式，这里也分别请求者两个入口，参照访问服务端的方式，选择 60000 端口访问客户端。
