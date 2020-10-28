@@ -43,6 +43,10 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 将 `management.server.port` 的值改为：`8081`；<br>
 本案例不使用这个端口，只是避免端口冲突。
 
+* 保存文件<br>
+mac 用户请使用 cmd + s；<br>
+windows 用户请使用 ctrl + s；
+
 ### 修改客户端配置
 
 * 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">server 的 application.properties</tutorial-editor-open-file> 文件：
@@ -66,6 +70,10 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 * 修改RestTemplate方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
 将其中的 `nacos-discovery-provider-sample` 替换为 `server`
+
+* 保存文件<br>
+mac 用户请使用 cmd + s；<br>
+windows 用户请使用 ctrl + s；
 
 ## 功能&代码说明
 
