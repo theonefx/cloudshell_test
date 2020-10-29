@@ -1,7 +1,7 @@
 # 微服务开发入门教学
 
 ## 教程说明
-微服务调用入门教程
+微服务调用入门教程展示使用
 
 
 
@@ -152,8 +152,6 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 ![image](https://img.alicdn.com/tfs/TB1y7520uL2gK0jSZFmXXc7iXXa-558-99.png)<br>
 看到上面的内容代表服务端可以正常工作。
 
-<tutorial-web-preview port="61000">打开浏览器</tutorial-web-preview>
-
 ### 访问客户端程序
 由于客户端提供2种调用方式，这里也分别请求者两个入口，参照访问服务端的方式，选择 60000 端口访问客户端。
 
@@ -163,3 +161,9 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 * RestTemplate<br>
 追加如下路径`/call/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
 ![image](https://img.alicdn.com/tfs/TB1.8940pP7gK0jSZFjXXc5aXXa-562-76.png)
+
+## 附录
+如果需要案例代码在自己的环境里学习，可以通过下面的链接获得：
+* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=provider&name=provider&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.provider&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider">服务端程序</a>
+* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer">客户端程序</a>
+
