@@ -48,9 +48,9 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 > 注意，不是 `management.server.port`！！。
 
 * 保存文件<br>
-完成修改以后，别忘了保存哦<br>
-> tips: 如何保存文件？<br>
-> * mac 用户：cmd + s <br>
+完成修改以后，别忘了保存哦
+> tips: 如何保存文件？
+> * mac 用户：cmd + s
 > * windows | linux 用户：ctrl + s
 
 ### 修改客户端配置
