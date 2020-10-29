@@ -13,13 +13,13 @@
 ### 获取客户端程序代码
 请使用下面的命令获取客户端程序代码
 ```bash
-git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
+git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
 ```
 
 ### 获取服务端程序工程
 请使用下面的命令获取服务端程序代码
 ```bash
-git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider/server.git" /home/shell/server
+git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider/server.git" /home/shell/server
 ```
 
 ----
@@ -45,7 +45,6 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`61000`；<br>
 > 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。<br>
-> 注意，不是 `management.server.port`！！。
 
 * 保存文件<br>
 完成修改以后，别忘了保存哦
@@ -64,10 +63,6 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`60000`；<br>
 > 要避免和服务端发生端口冲突，而61000已经被分配给了服务端，这里就用60000。
-
-* 修改 Web 管理端口<br>
-将 `management.server.port` 的值改为：`8082`；<br>
-> 本案例不使用这个端口，只是避免端口冲突。
 
 * 修改OpenFeign方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file> <br>
@@ -210,6 +205,6 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 
 ## 附录
 如果你觉得还不过瘾，想在自己的环境中学习和调试前面的代码，可以在这里获得：
-* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=provider&name=provider&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.provider&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider">服务端程序</a>
-* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer">客户端程序</a>
+* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=provider&name=provider&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.provider&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider">服务端程序</a>
+* <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer">客户端程序</a>
 
