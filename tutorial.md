@@ -8,28 +8,31 @@
 案例学习时间预计15分钟左右。
 
 ## 获取程序代码
+本节，你将通过 git 命令下载程序代码
 
-* 获取客户端程序代码：
+### 获取客户端程序代码
+请使用下面的命令获取客户端程序代码
 ```bash
 git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
 ```
 
-* 获取服务端程序工程：
+### 获取服务端程序工程
+请使用下面的命令获取服务端程序代码
 ```bash
 git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider/server.git" /home/shell/server
 ```
 
-完成以上操作后，你将会获得链各个工程的代码，如下：<br>
-![image](https://img.alicdn.com/tfs/TB1njut0AL0gK0jSZFtXXXQCXXa-212-558.png)
+----
+完成上面的操作以后，请手动触发刷新一下文件目录：<br>
+![image](https://img.alicdn.com/tfs/TB1VQWqnwgP7K4jSZFqXXamhVXa-213-90.png)
 
-如果文件目录树没有，可以通过下面的按钮手动刷新：<br>
-![image](https://img.alicdn.com/tfs/TB14b9Ei5pE_u4jSZKbXXbCUVXa-746-398.png)
+完成以上操作后，你将会获得链各个工程的代码，如下：<br>
+![image](https://img.alicdn.com/tfs/TB1JZzuqk9l0K4jSZFKXXXFjpXa-170-182.png)
+
 
 ## 修改配置
+本节，你讲修改代码的一些基本配置，让程序可以运行。<br>
 请认真按照本节的引导操作。在完成修改后，一定要记得保存哦。
-> tips: 如何保存文件？<br>
-> * mac 用户：cmd + s <br>
-> * windows | linux 用户：ctrl + s
 
 ### 修改服务端配置
 
@@ -40,9 +43,15 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 > 该注册中心为平台提供的免费注册中心服务实例；
 
 * 修改 Web 访问端口<br>
-将 `server.port` 的值改为：`60000`；<br>
+将 `server.port` 的值改为：`61000`；<br>
 > 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。<br>
 > 注意，不是 `management.server.port`！！。
+
+* 保存文件<br>
+完成修改以后，别忘了保存哦<br>
+> tips: 如何保存文件？<br>
+> * mac 用户：cmd + s <br>
+> * windows | linux 用户：ctrl + s
 
 ### 修改客户端配置
 
@@ -53,8 +62,8 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 > 服务端和客户端要使用一个注册中心才能相互发现哦；
 
 * 修改 Web 访问端口<br>
-将 `server.port` 的值改为：`61000`；<br>
-> 要避免和服务端发生端口冲突，而60000已经被分配给了服务端，这里就用61000。
+将 `server.port` 的值改为：`60000`；<br>
+> 要避免和服务端发生端口冲突，而61000已经被分配给了服务端，这里就用60000。
 
 * 修改 Web 管理端口<br>
 将 `management.server.port` 的值改为：`8082`；<br>
@@ -67,6 +76,9 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 * 修改RestTemplate方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
 将其中的 `nacos-discovery-provider-sample` 替换为 `server`
+
+* 保存文件<br>
+客户端修改了3个文件，别忘了都保存哦
 
 > 对 EchoService 和 RestTemplateController 修改，会在下一节做详细说明；
 
@@ -117,6 +129,7 @@ RestTemplate 是 spring 对所有 restful 服务调用的封装。<br>
 
 
 ## 编译打包
+本节，你需要使用 maven 的命令将程序代码编译打包为可执行的 jar 包
 
 ### 编译服务端程序
 
@@ -129,7 +142,7 @@ cd /home/shell/server
 ```bash
 mvn clean package -Dmaven.test.skip
 ```
-> tipc: 第一次编译，因为本地 maven 仓库缺少相关的类库，编译可能会花1~2分钟的时间
+> tips: 第一次编译，因为本地 maven 仓库缺少相关的类库，编译可能会花1~2分钟的时间
 
 ### 编译客户端程序
 * 进入服务端目录
@@ -146,7 +159,7 @@ mvn clean package -Dmaven.test.skip
 
 ## 运行程序
 
-我们使用原生 java -jar 命令直接启动应用
+本节，你将使用 java 命令来运行上一步打包完成的 jar 文件
 
 ### 启动服务端
 1. 开启新 console 窗口：<br>
@@ -157,7 +170,7 @@ mvn clean package -Dmaven.test.skip
 java -jar /home/shell/server/target/server-0.0.1-SNAPSHOT.jar
 ```
 看到下面的反馈则表示启动成功<br>
-![image](https://img.alicdn.com/tfs/TB1eLr_nggP7K4jSZFqXXamhVXa-1397-452.png)
+![image](https://img.alicdn.com/tfs/TB1dAzYl5DsXe8jSZR0XXXK6FXa-620-192.png)
 
 
 ### 启动客户端
@@ -169,28 +182,31 @@ java -jar /home/shell/server/target/server-0.0.1-SNAPSHOT.jar
 java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 ```
 看到下面的反馈则表示启动成功<br>
-![image](https://img.alicdn.com/tfs/TB1aX9V0xv1gK0jSZFFXXb0sXXa-1366-501.png)
+![image](https://img.alicdn.com/tfs/TB1XVX8p_M11u4jSZPxXXahcXXa-608-195.png)
 
 
 ## 访问应用程序
+
+本节，你将通过浏览器访问在上一节运行起来的服务端程序和客户端程序
+
 ### 直接访问服务端程序
 由于服务端使用http协议提供服务，所以可以直接使用浏览器访问，我们先来验证服务端的功能。<br>
-前面已经为服务端设置了61000的端口，我们先链接该端口。<br>
-点击平台右上角的网页预览按钮，选择 61000 端口：<br>
-![image](https://img.alicdn.com/tfs/TB1COaJ0vb2gK0jSZK9XXaEgFXa-307-296.png)<br>
+前面已经为服务端设置了60000的端口，我们先链接该端口。<br>
+点击平台右上角的网页预览按钮，选择 60000 端口：<br>
+![image](https://img.alicdn.com/tfs/TB1PyCqnwgP7K4jSZFqXXamhVXa-331-320.png)<br>
 由于在打开的窗口中没有指定路径，所以首次打开会有错误提示，需要在打开的窗口中，追加服务路径：
-![image](https://img.alicdn.com/tfs/TB1y7520uL2gK0jSZFmXXc7iXXa-558-99.png)<br>
+![image](https://img.alicdn.com/tfs/TB1FJ.W0xz1gK0jSZSgXXavwpXa-617-89.png)<br>
 看到上面的内容代表服务端可以正常工作。
 
 ### 访问客户端程序
-由于客户端提供2种调用方式，这里也分别请求者两个入口，参照访问服务端的方式，选择 60000 端口访问客户端。
+由于客户端提供2种调用方式，这里也分别请求者两个入口，参照访问服务端的方式，选择 61000 端口访问客户端。
 
 * Openfeign<br>
 追加如下路径`/feign/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
-![image](https://img.alicdn.com/tfs/TB1mnqW0xv1gK0jSZFFXXb0sXXa-618-80.png)
+![image](https://img.alicdn.com/tfs/TB1in780EY1gK0jSZFCXXcwqXXa-664-78.png)
 * RestTemplate<br>
 追加如下路径`/call/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
-![image](https://img.alicdn.com/tfs/TB1.8940pP7gK0jSZFjXXc5aXXa-562-76.png)
+![image](https://img.alicdn.com/tfs/TB19WR8p_M11u4jSZPxXXahcXXa-666-73.png)
 
 ## 附录
 如果你觉得还不过瘾，想在自己的环境中学习和调试前面的代码，可以在这里获得：
