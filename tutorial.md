@@ -1,63 +1,64 @@
 # 微服务开发入门教学
 
 ## 教程说明
-微服务调用入门教程展示使用
+通过该教程，你将会：
+* 使用 spring cloud alibaba 搭建一个最小化的微服务集群。
+* 并完成客户端和服务端之间的调用示例。
 
-
+案例学习时间预计15分钟左右。
 
 ## 获取程序代码
-由于最小的微服务系统需要至少2个应用参与，这里我们就分别拉取一个client一个server两个应用。
 
-* 获取Client代码：
+* 获取客户端程序代码：
 ```bash
 git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
 ```
 
-* 获取Server工程：
+* 获取服务端程序工程：
 ```bash
 git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider/server.git" /home/shell/server
 ```
 
-
 完成以上操作后，你将会获得链各个工程的代码，如下：<br>
 ![image](https://img.alicdn.com/tfs/TB1njut0AL0gK0jSZFtXXXQCXXa-212-558.png)
 
-
+如果文件目录树没有，可以通过下面的按钮手动刷新：<br>
+![image](https://img.alicdn.com/tfs/TB14b9Ei5pE_u4jSZKbXXbCUVXa-746-398.png)
 
 ## 修改配置
-要实现微服务的注册与发现功能，需要分别向client和server配置注册中心的地址。
+请认真按照本节的引导操作。在完成修改后，一定要记得保存哦。
+> tips: 如何保存文件？<br>
+> * mac 用户：cmd + s <br>
+> * windows | linux 用户：ctrl + s
 
 ### 修改服务端配置
 
-* 打开 <tutorial-editor-open-file filePath="/home/shell/client/src/main/resources/application.properties">client 的 application.properties</tutorial-editor-open-file> 文件：
+* 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">服务端的 application.properties</tutorial-editor-open-file> 文件：
 
-* 为client配置注册中心地址<br>
+* 为服务端配置注册中心地址<br>
 将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
-该注册中心为平台提供的免费注册中心服务实例；
+> 该注册中心为平台提供的免费注册中心服务实例；
 
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`60000`；<br>
-出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。
-
-* 修改 Web 管理端口<br>
-将 `management.server.port` 的值改为：`8081`；<br>
-本案例不使用这个端口，只是避免端口冲突。
+> 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。<br>
+> 注意，不是 `management.server.port`！！。
 
 ### 修改客户端配置
 
-* 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">server 的 application.properties</tutorial-editor-open-file> 文件：
+* 打开 <tutorial-editor-open-file filePath="/home/shell/client/src/main/resources/application.properties">客户端的 application.properties</tutorial-editor-open-file> 文件：
 
 * 为client配置注册中心地址<br>
 将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
-该注册中心为平台提供的免费注册中心服务实例，服务端和客户端要使用一个注册中心才能相互发现；
+> 服务端和客户端要使用一个注册中心才能相互发现哦；
 
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`61000`；<br>
-出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。同时不要和服务端发生端口冲突。
+> 要避免和服务端发生端口冲突，而60000已经被分配给了服务端，这里就用61000。
 
 * 修改 Web 管理端口<br>
 将 `management.server.port` 的值改为：`8082`；<br>
-本案例不使用这个端口，只是避免端口冲突。
+> 本案例不使用这个端口，只是避免端口冲突。
 
 * 修改OpenFeign方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file> <br>
@@ -67,24 +68,53 @@ git clone "https://start.aliyun.com/git/type=maven-project&language=java&archite
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
 将其中的 `nacos-discovery-provider-sample` 替换为 `server`
 
+> 对 EchoService 和 RestTemplateController 修改，会在下一节做详细说明；
+
 ## 功能&代码说明
 
-### server 端
-server程序作为服务的提供者只提供一个
-<tutorial-editor-open-file filePath="/home/shell/server/src/main/java/com/example/server/demos/nacosdiscoveryprovider/EchoServiceController.java">EchoServiceController</tutorial-editor-open-file> 
-服务。<br>
-该服务只有一个方法，接收字符串型的消息，并返回 `"[ECHO] : " + message` 内容;<br>
-EchoServiceController 通过 http 协议对外提供服务能力，所以这个服务也可以直接使用http的客户端访问，例如你的浏览器；<br>
-server 程序，通过 nacos 实现应用的注册。
+本节主要是对内容的说明和介绍，没有对项目的操作内容；
 
-### client 端
-client程序，消费server端提供的服务
-client 通过注册中心发现服务端应用。<br>
-client 提供2中方式调用 server。
-* OpenFeign<br>
-<tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/OpenFeignController.java">OpenFeignController</tutorial-editor-open-file> 
-* RestTemplate<br>
-<tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> 
+### 服务端
+在本案例中，服务端只提供一个服务，即：
+<tutorial-editor-open-file filePath="/home/shell/server/src/main/java/com/example/server/demos/nacosdiscoveryprovider/EchoServiceController.java">EchoServiceController</tutorial-editor-open-file> 
+<br>
+该服务只有一个方法，接收字符串型的消息，并返回 `"[ECHO] : " + message` 内容。这里的逻辑实现，并不具有太多的业务意义，只是对服务端逻辑执行的演示。
+
+可以看到， 在 EchoServiceController 上增加了 `@RestController` 注解。熟悉 spring 的同学应该知道，这代表了被标注类是一个 Rest 风格的 http 接口。<br>
+在 echo 方法上，由于标注了 `@GetMapping("/echo/{message}")` 注解，所以可以通过 `http://ip:port/echo/{message}` 来直接访问。<br>
+其中的 \{message\} 可以被替换为你需要的任何消息。<br>
+后面章节会对具体的访问做演示。
+
+
+### 客户端
+客户端程序自身并没有业务逻辑的实现，而是通过调用服务端的业务服务来实现业务，所以在本案例中需要重点关注如何使用客户端调用服务端。
+
+在本案例中，客户端通过 nacos 的注册中心功能实现对服务端的发现。所以你会发现在客户端里并没有配置任何 `服务端的地址` 信息。<br>
+参考：<tutorial-editor-open-file filePath="/home/shell/client/src/main/resources/application.properties">客户端的 application.properties</tutorial-editor-open-file>
+
+
+本案例中的客户端通过两种方式调用服务端，所谓的”两种方式“具体来说是两种消费客户端的编程模型：
+#### 使用 OpenFeign 方式<br>
+参考：<tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/OpenFeignController.java">OpenFeignController</tutorial-editor-open-file>，<tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file><br>
+
+* `OpenFeignController` 作为web调用的入口，用于接收前端的调用请求，并向内调用业务与服务实现功能。<br>
+* `EchoService` 是应用中对服务端所提供服务的引用接口。<br>
+在这个接口上，标注了 `@FeignClient` 注解，以表示这个接口的服务是哪个服务端提供的。<br>
+`@FeignClient` 注解的值代表了服务端应用的 `服务端应用名`，以便于在多个不通过的服务提供者之间确定具体的服务。
+
+####  使用 RestTemplate 方式<br>
+参考：<tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file><br>
+RestTemplate 是 spring 对所有 restful 服务调用的封装。<br>
+在 RestTemplateController 中，通过 restTemplate.getForObject 来调用服务端的 EchoServiceController.echo 方法。<br>
+通过前文的操作，将 getForObject 的第一个参数改为 `"http://server/echo/" + message`。这看起来像是一个标准的url地址，但是其中的`server`并不是域名，而是服务提供者的应用名。<br>
+
+----
+前文说到，客户端并不关注`服务端的地址`，但是需要关注`服务端应用名`，这两个概念是有区别的：
+* `服务端应用名`：是一个逻辑概念，代表可以被独立部署的一套应用程序；
+* `服务端的地址`：是物理概念，是实际部署以后具体的物理地址，例如IP；
+
+每个`服务端应用名`可以部署多份实例，每个实例都有自己的`服务端的地址`。
+
 
 ## 编译打包
 
@@ -163,7 +193,7 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 ![image](https://img.alicdn.com/tfs/TB1.8940pP7gK0jSZFjXXc5aXXa-562-76.png)
 
 ## 附录
-如果需要案例代码在自己的环境里学习，可以通过下面的链接获得：
+如果你觉得还不过瘾，想在自己的环境中学习和调试前面的代码，可以在这里获得：
 * <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=provider&name=provider&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.provider&dependencies=sca-nacos-discovery,web,actuator&demos=nacosdiscoveryprovider">服务端程序</a>
 * <a target="_blank" href="https://start.aliyun.com/bootstrap.html/#!type=maven-project&language=java&architecture=none&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&dependencies=sca-nacos-discovery,web,actuator,cloud-feign&demos=nacosdiscoveryconsumer">客户端程序</a>
 
