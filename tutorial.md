@@ -13,19 +13,16 @@
 ### 获取客户端程序代码
 请使用下面的命令获取客户端程序代码
 ```bash
-git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
+cloudshell-git-open "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
 ```
 
 ### 获取服务端程序工程
 请使用下面的命令获取服务端程序代码
 ```bash
-git clone "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider/server.git" /home/shell/server
+cloudshell-git-open "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider/server.git" /home/shell/server
 ```
 
 ----
-完成上面的操作以后，请手动触发刷新一下文件目录：<br>
-![image](https://img.alicdn.com/tfs/TB1VQWqnwgP7K4jSZFqXXamhVXa-213-90.png)
-
 完成以上操作后，你将会获得链各个工程的代码，如下：<br>
 ![image](https://img.alicdn.com/tfs/TB1JZzuqk9l0K4jSZFKXXXFjpXa-170-182.png)
 
