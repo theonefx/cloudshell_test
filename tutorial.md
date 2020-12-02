@@ -36,8 +36,8 @@ cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&a
 * 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">服务端的 application.properties</tutorial-editor-open-file> 文件：
 
 * 修改 Web 访问端口<br>
-将 `server.port` 的值改为：`61000`；<br>
-<tutorial-editor-select-line startLine="14" filePath="/home/shell/server/src/main/resources/application.properties" replaceText="server.port=61000">点我执行修改</tutorial-editor-select-line>
+将 `server.port` 的值改为：`60000`；<br>
+<tutorial-editor-select-line startLine="14" filePath="/home/shell/server/src/main/resources/application.properties" replaceText="server.port=60000">点我执行修改</tutorial-editor-select-line>
 > 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。<br>
 
 ### 修改客户端配置
@@ -45,9 +45,9 @@ cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&a
 * 打开 <tutorial-editor-open-file filePath="/home/shell/client/src/main/resources/application.properties">客户端的 application.properties</tutorial-editor-open-file> 文件：
 
 * 修改 Web 访问端口<br>
-将 `server.port` 的值改为：`60000`；<br>
-<tutorial-editor-select-line startLine="14" filePath="/home/shell/client/src/main/resources/application.properties" replaceText="server.port=60000">点我执行修改</tutorial-editor-select-line>
-> 要避免和服务端发生端口冲突，而61000已经被分配给了服务端，这里就用60000。
+将 `server.port` 的值改为：`61000`；<br>
+<tutorial-editor-select-line startLine="14" filePath="/home/shell/client/src/main/resources/application.properties" replaceText="server.port=61000">点我执行修改</tutorial-editor-select-line>
+> 要避免和服务端发生端口冲突，而60000已经被分配给了服务端，这里就用61000。
 
 * 修改OpenFeign方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file> <br>
