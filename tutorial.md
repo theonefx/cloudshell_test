@@ -24,7 +24,7 @@ cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&a
 
 ----
 完成以上操作后，你将会获得链各个工程的代码，如下：<br>
-![image](https://img.alicdn.com/tfs/TB1JZzuqk9l0K4jSZFKXXXFjpXa-170-182.png)
+![image](https://img.alicdn.com/tfs/TB1EQEBpiDsXe8jSZR0XXXK6FXa-106-124.png)
 
 
 ## 修改配置
