@@ -13,13 +13,13 @@
 ### 获取客户端程序代码
 请使用下面的命令获取客户端程序代码
 ```bash
-cloudshell-git-open "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
+cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=client&groupId=com.example&artifactId=client&name=client&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.client&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web,cloud-feign&demos=nacosdiscoveryconsumer/client.git" /home/shell/client
 ```
 
 ### 获取服务端程序工程
 请使用下面的命令获取服务端程序代码
 ```bash
-cloudshell-git-open "https://start.aliyun.com/git/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider/server.git" /home/shell/server
+cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&architecture=none&bootVersion=2.3.4.RELEASE&baseDir=server&groupId=com.example&artifactId=server&name=server&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.server&packaging=jar&javaVersion=1.8&dependencies=sca-nacos-discovery,web&demos=nacosdiscoveryprovider/server.git" /home/shell/server
 ```
 
 ----
@@ -35,42 +35,30 @@ cloudshell-git-open "https://start.aliyun.com/git/type=maven-project&language=ja
 
 * 打开 <tutorial-editor-open-file filePath="/home/shell/server/src/main/resources/application.properties">服务端的 application.properties</tutorial-editor-open-file> 文件：
 
-* 为服务端配置注册中心地址<br>
-将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
-> 该注册中心为平台提供的免费注册中心服务实例；
-
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`61000`；<br>
+<tutorial-editor-select-line startLine="14" filePath="/home/shell/server/src/main/resources/application.properties" replaceText="server.port=61000">点我执行修改</tutorial-editor-select-line>
 > 出于安全性和其他平台限制的考虑，目前外部只能使用6\[0-5\]000六个端口。<br>
-
-* 保存文件<br>
-完成修改以后，别忘了保存哦
-> tips: 如何保存文件？
-> * mac 用户：cmd + s
-> * windows | linux 用户：ctrl + s
 
 ### 修改客户端配置
 
 * 打开 <tutorial-editor-open-file filePath="/home/shell/client/src/main/resources/application.properties">客户端的 application.properties</tutorial-editor-open-file> 文件：
 
-* 为client配置注册中心地址<br>
-将 `spring.cloud.nacos.discovery.server-addr` 的值改为：`mse-6d50f4f0-p.nacos-ans.mse.aliyuncs.com:8848`；<br>
-> 服务端和客户端要使用一个注册中心才能相互发现哦；
-
 * 修改 Web 访问端口<br>
 将 `server.port` 的值改为：`60000`；<br>
+<tutorial-editor-select-line startLine="14" filePath="/home/shell/client/src/main/resources/application.properties" replaceText="server.port=60000">点我执行修改</tutorial-editor-select-line>
 > 要避免和服务端发生端口冲突，而61000已经被分配给了服务端，这里就用60000。
 
 * 修改OpenFeign方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java">EchoService</tutorial-editor-open-file> <br>
-将其中的 `nacos-discovery-provider-sample` 替换为 `server`
+将其中的 `nacos-discovery-provider-sample` 替换为 `server`<br>
+<tutorial-editor-select-line startLine="23" filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/EchoService.java" replaceText='@FeignClient("server")'>点我执行修改</tutorial-editor-select-line>
+
 
 * 修改RestTemplate方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
-将其中的 `nacos-discovery-provider-sample` 替换为 `server`
-
-* 保存文件<br>
-客户端修改了3个文件，别忘了都保存哦
+将其中的 `nacos-discovery-provider-sample` 替换为 `server`<br>
+<tutorial-editor-select-line startLine="43" filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java" replaceText='        return restTemplate.getForObject("http://server/echo/" + message, String.class);'>点我执行修改</tutorial-editor-select-line>
 
 > 对 EchoService 和 RestTemplateController 修改，会在下一节做详细说明；
 
@@ -155,7 +143,7 @@ mvn clean package -Dmaven.test.skip
 
 ### 启动服务端
 1. 开启新 console 窗口：<br>
-![image](https://img.alicdn.com/tfs/TB1yWaS0uL2gK0jSZPhXXahvXXa-386-96.png)
+<tutorial-terminal-open-tab name="服务端">点击我打开</tutorial-terminal-open-tab>
 
 2. 在新窗口中执行命令
 ```bash
@@ -167,7 +155,7 @@ java -jar /home/shell/server/target/server-0.0.1-SNAPSHOT.jar
 
 ### 启动客户端
 1. 开启新 console 窗口：<br>
-![image](https://img.alicdn.com/tfs/TB1yWaS0uL2gK0jSZPhXXahvXXa-386-96.png)
+<tutorial-terminal-open-tab name="客户端">点击我打开</tutorial-terminal-open-tab>
 
 2. 在新窗口中执行命令
 ```bash
@@ -183,21 +171,21 @@ java -jar /home/shell/client/target/client-0.0.1-SNAPSHOT.jar
 
 ### 直接访问服务端程序
 由于服务端使用http协议提供服务，所以可以直接使用浏览器访问，我们先来验证服务端的功能。<br>
-前面已经为服务端设置了60000的端口，我们先链接该端口。<br>
-点击平台右上角的网页预览按钮，选择 60000 端口：<br>
-![image](https://img.alicdn.com/tfs/TB1PyCqnwgP7K4jSZFqXXamhVXa-331-320.png)<br>
-由于在打开的窗口中没有指定路径，所以首次打开会有错误提示，需要在打开的窗口中，追加服务路径：
+通过<tutorial-web-preview port="60000" path="/echo/theonefx">链接</tutorial-web-preview> 访问地址 `http://{ip}:60000/echo/theonefx` <br>
+看到下面的内容代表服务端可以正常工作。
 ![image](https://img.alicdn.com/tfs/TB1FJ.W0xz1gK0jSZSgXXavwpXa-617-89.png)<br>
-看到上面的内容代表服务端可以正常工作。
+
 
 ### 访问客户端程序
 由于客户端提供2种调用方式，这里也分别请求者两个入口，参照访问服务端的方式，选择 61000 端口访问客户端。
 
 * Openfeign<br>
-追加如下路径`/feign/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
+使用<tutorial-web-preview port="61000" path="/feign/echo/RestTemplate">链接</tutorial-web-preview>访问地址 `http://{ip}:61000/feign/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
+
 ![image](https://img.alicdn.com/tfs/TB1in780EY1gK0jSZFCXXcwqXXa-664-78.png)
 * RestTemplate<br>
-追加如下路径`/call/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
+使用<tutorial-web-preview port="61000" path="/call/echo/OpenFeign">链接</tutorial-web-preview>访问地址 `http://{ip}:61000/call/echo/{message}` 其中 {message} 可以替换为你需要的信息，你可以看到下面的效果：<br>
+
 ![image](https://img.alicdn.com/tfs/TB19WR8p_M11u4jSZPxXXahcXXa-666-73.png)
 
 ## 附录
