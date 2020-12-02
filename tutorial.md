@@ -58,7 +58,7 @@ cloudshell-git-open "https://start.aliyun.com/type=maven-project&language=java&a
 * 修改RestTemplate方式调用的服务名称<br>
 打开文件 <tutorial-editor-open-file filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java">RestTemplateController</tutorial-editor-open-file> <br>
 将其中的 `nacos-discovery-provider-sample` 替换为 `server`<br>
-<tutorial-editor-select-line startLine="43" filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java" replaceText='        return restTemplate.getForObject("http://server/echo/" + message, String.class);'>点我执行修改</tutorial-editor-select-line>
+<tutorial-editor-select-line startLine="43" startCharacterOffset="9" filePath="/home/shell/client/src/main/java/com/example/client/demos/nacosdiscoveryconsumer/RestTemplateController.java" replaceText='        return restTemplate.getForObject("http://server/echo/" + message, String.class);'>点我执行修改</tutorial-editor-select-line>
 
 > 对 EchoService 和 RestTemplateController 修改，会在下一节做详细说明；
 
